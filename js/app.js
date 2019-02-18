@@ -1,6 +1,9 @@
-
+//Proyecto para crear una Calculadora en JavaScript
 var Calculadora = (function(){
+  //creamos variables globales
   var valor1, valor2, resultado, signo, pantalla, signoAnterior, valor1Anterior, valor2Anterior;
+
+  //le damos formato
   valor1='';
   valor2='';
   signo =null;
@@ -9,18 +12,23 @@ var Calculadora = (function(){
   valor2Anterior='';
   signoAnterior =null;
 
+  //vinculamos el display a la variable pantalla (donde se van a visualizar los numeros, operaciones y resultados)
   pantalla = document.getElementById( 'display' );
 
+  //ON: reseteamos todo
   document.getElementById( 'on' ).onmousedown = function Resetear(){
     valor1='';
     valor2='';
     signo =null;
     signoAnterior=null;
+    valor1Anterior='';
+    valor2Anterior='';
     resultado=0;
     pantalla.innerHTML = '0';
   }
 
   //---------------------------- punto--------------------------------
+  // Aqui realizamos todas las operaciones el punto para decimales
   document.getElementById( 'punto' ).onmousedown = function Decimal(){
     if (signo ==null) {
       if (valor1.length < 8) {
@@ -41,6 +49,7 @@ var Calculadora = (function(){
     }
   }
   // ------------------negativo,positivo---------------------------
+  //Operaciones para numeros positivos y negativos
   document.getElementById( 'sign' ).onmousedown = function Signo(){
     if (pantalla.innerHTML!='0') {
         if (signo ==null || signo=='igual') {
@@ -57,6 +66,7 @@ var Calculadora = (function(){
 
 
   // -----------------------Numeros------------------------------
+  // Operaciones con todos los numeros de la calculadora del 0 al 9
   document.getElementById( '0' ).onmousedown = function cero(){
     LimpiarVariables();
 
@@ -216,6 +226,8 @@ var Calculadora = (function(){
     }
   }
   // -------------------------Signos------------------------------
+  // La operacion que deseamos realizar... suma, resta, multiplicacion y division
+  // Aqui solo le asignamos que tipo de operacion es a la variable signo
   document.getElementById( 'mas' ).onmousedown = function Sumar(){
         ValidarSignoYvalor2();
         signo='sumar'
@@ -237,6 +249,7 @@ var Calculadora = (function(){
         pantalla.innerHTML = '0';
   }
   // -------------------------Resultado------------------------------
+  // Aqui es donde realizamos las operaciones
   document.getElementById( 'igual' ).onmousedown = function Resultado(){
     if (signo!=null && valor1!='' && valor2!='') {
       var numero1 = parseFloat(valor1);
